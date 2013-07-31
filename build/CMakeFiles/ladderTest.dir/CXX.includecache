@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mpaldhe/DRC/exampleLadderPipeline/ladder-pipeline-example.cpp
+stdio.h
+-
+iostream
+-
+Ladder.h
+-
+hubo.h
+-
+
