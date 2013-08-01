@@ -38,10 +38,10 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/mpaldhe/DRC/exampleLadderPipeline
+CMAKE_SOURCE_DIR = /home/mpaldhe/DRC/ladder-pipeline-example
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/mpaldhe/DRC/exampleLadderPipeline/build
+CMAKE_BINARY_DIR = /home/mpaldhe/DRC/ladder-pipeline-example/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/ladderTest.dir/depend.make
@@ -54,17 +54,17 @@ include CMakeFiles/ladderTest.dir/flags.make
 
 CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.o: CMakeFiles/ladderTest.dir/flags.make
 CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.o: ../ladder-pipeline-example.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mpaldhe/DRC/exampleLadderPipeline/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mpaldhe/DRC/ladder-pipeline-example/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.o -c /home/mpaldhe/DRC/exampleLadderPipeline/ladder-pipeline-example.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.o -c /home/mpaldhe/DRC/ladder-pipeline-example/ladder-pipeline-example.cpp
 
 CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mpaldhe/DRC/exampleLadderPipeline/ladder-pipeline-example.cpp > CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mpaldhe/DRC/ladder-pipeline-example/ladder-pipeline-example.cpp > CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.i
 
 CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mpaldhe/DRC/exampleLadderPipeline/ladder-pipeline-example.cpp -o CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mpaldhe/DRC/ladder-pipeline-example/ladder-pipeline-example.cpp -o CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.s
 
 CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.o.requires:
 .PHONY : CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.o.requires
@@ -100,6 +100,6 @@ CMakeFiles/ladderTest.dir/clean:
 .PHONY : CMakeFiles/ladderTest.dir/clean
 
 CMakeFiles/ladderTest.dir/depend:
-	cd /home/mpaldhe/DRC/exampleLadderPipeline/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/mpaldhe/DRC/exampleLadderPipeline /home/mpaldhe/DRC/exampleLadderPipeline /home/mpaldhe/DRC/exampleLadderPipeline/build /home/mpaldhe/DRC/exampleLadderPipeline/build /home/mpaldhe/DRC/exampleLadderPipeline/build/CMakeFiles/ladderTest.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/mpaldhe/DRC/ladder-pipeline-example/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/mpaldhe/DRC/ladder-pipeline-example /home/mpaldhe/DRC/ladder-pipeline-example /home/mpaldhe/DRC/ladder-pipeline-example/build /home/mpaldhe/DRC/ladder-pipeline-example/build /home/mpaldhe/DRC/ladder-pipeline-example/build/CMakeFiles/ladderTest.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ladderTest.dir/depend
 

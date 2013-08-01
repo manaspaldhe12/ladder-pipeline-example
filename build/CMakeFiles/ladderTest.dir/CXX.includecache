@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/mpaldhe/DRC/exampleLadderPipeline/ladder-pipeline-example.cpp
+/home/mpaldhe/DRC/ladder-pipeline-example/ladder-pipeline-example.cpp
 stdio.h
 -
 iostream
