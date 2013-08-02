@@ -1,0 +1,66 @@
+#!/bin/sh  
+
+### BEGIN INIT INFO
+# Provides:             hubo-daemon control-daemon
+# Required-Start:       N/A
+# Required-Stop:        N/A
+# Should-Start:         N/A
+# Should-Stop:          N/A
+# Short-Description:    Startup for operating Hubo
+# Description:          Opens Ach channels, configures pcan
+#           settings, and turns on basic daemons for operating
+#           a Hubo2+ robot using peak-can cards based on
+#           socket can.
+
+
+
+
+# Manas ( mxgrey@gatech.edu )
+# Last updated: 04/26/2013
+# Contact the author for support or questions regarding operation.
+
+#HUBO_BITRATE=0x0014 # 1 Mbit/s
+#HUBO_BITRATE=0x001C #	500 kbit/s
+#HUBO_BITRATE=0x011C #	250 kbit/s
+#HUBO_BITRATE=0x031C #	125 kbit/s
+#HUBO_BITRATE=0x432F #	100 kbit/s
+#HUBO_BITRATE=0x472F #	50 kbit/s
+#HUBO_BITRATE=0x532F #	20 kbit/s
+#HUBO_BITRATE=0x672F #	10 kbit/s
+#HUBO_BITRATE=0x7F7F #	5 kbit/s
+
+
+LADDER_PLANNERINITCHAN='ladderplanner'
+HUBO_CHAN_LADDER_TRAJ_NAME='ladder-cmd'
+
+DAEMON_DIR='/etc/hubo-daemon'
+DAEMON_LOG_DIR='/var/log/hubo'
+LOCK_DIR='/var/lock/hubo'
+
+Ach()
+{
+	sudo ach -U $LADDER_PLANNERINITCHAN
+	sudo ach -U $HUBO_CHAN_LADDER_TRAJ_NAME
+
+        sudo ach -1 -C $LADDER_PLANNERINITCHAN    -m 10 -n 6000 -o 666
+        sudo ach -1 -C $HUBO_CHAN_LADDER_TRAJ_NAME    -m 3 -n 8000000 -o 666
+}
+
+
+case "$1" in
+# Start all channels and processes
+	'start' )
+		Ach $@
+	;;
+
+	'send')
+		Ach $2
+	;;
+
+	*)
+		ShowUsage
+		exit 1
+	;;
+esac
+
+exit 0
