@@ -1,9 +1,10 @@
 //#include <ach.h>
 #include <stdio.h>
 #include <iostream>
-#include <Ladder.h>
+#include <Ladderach.h>
 #include <hubo.h>
 #include <balance-daemon.h>
+#include <hubo-zmp.h>
 
 int main (){
 
@@ -37,7 +38,7 @@ int main (){
 	for (int joint=0; joint<HUBO_JOINT_COUNT; joint++){
 		currentTraj.traj[i].angles[joint]=0;
 		if (joint==LEB){
-			currentTraj.traj[i].angles[LEB]=i/2000;
+			currentTraj.traj[i].angles[LEB]=((float)(i))/2000;
 		}
 	}
   }
@@ -45,8 +46,9 @@ int main (){
   ach_channel_t balance_cmd_chan;
   balance_cmd_t ladder_mode;
   memset( &ladder_mode, 0, sizeof(ladder_mode) );
-  ladder_mode.cmd_request= BAL_LADDER_CLIMBING;
-  
+  //ladder_mode.cmd_request= BAL_ZMP_WALKING;//BAL_LADDER_CLIMBING;
+  ladder_mode.cmd_request=BAL_LADDER_CLIMBING;
+ 
   r = ach_open(&balance_cmd_chan, BALANCE_CMD_CHAN, NULL );
   if( r != ACH_OK )
       fprintf( stderr, "Problem with channel %s: %s (%d)\n",
