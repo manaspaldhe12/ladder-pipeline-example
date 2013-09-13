@@ -33,7 +33,7 @@ int main (){
   ach_channel_t ladder_chan;
   zmp_traj_t currentTraj;
   memset( &currentTraj, 0, sizeof(currentTraj) );
-  currentTraj.count=2000;
+  currentTraj.count=20000;
   for (int i=0; i<2000; i++){
 	for (int joint=0; joint<HUBO_JOINT_COUNT; joint++){
 		currentTraj.traj[i].angles[joint]=0;

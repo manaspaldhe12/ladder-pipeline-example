@@ -114,6 +114,19 @@ ladderTest/fast:
 	$(MAKE) -f CMakeFiles/ladderTest.dir/build.make CMakeFiles/ladderTest.dir/build
 .PHONY : ladderTest/fast
 
+#=============================================================================
+# Target rules for targets named trajectory-follower
+
+# Build rule for target.
+trajectory-follower: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 trajectory-follower
+.PHONY : trajectory-follower
+
+# fast build rule for target.
+trajectory-follower/fast:
+	$(MAKE) -f CMakeFiles/trajectory-follower.dir/build.make CMakeFiles/trajectory-follower.dir/build
+.PHONY : trajectory-follower/fast
+
 ladder-pipeline-example.o: ladder-pipeline-example.cpp.o
 .PHONY : ladder-pipeline-example.o
 
@@ -138,6 +151,30 @@ ladder-pipeline-example.cpp.s:
 	$(MAKE) -f CMakeFiles/ladderTest.dir/build.make CMakeFiles/ladderTest.dir/ladder-pipeline-example.cpp.s
 .PHONY : ladder-pipeline-example.cpp.s
 
+pipeline-trajectory-follower.o: pipeline-trajectory-follower.cpp.o
+.PHONY : pipeline-trajectory-follower.o
+
+# target to build an object file
+pipeline-trajectory-follower.cpp.o:
+	$(MAKE) -f CMakeFiles/trajectory-follower.dir/build.make CMakeFiles/trajectory-follower.dir/pipeline-trajectory-follower.cpp.o
+.PHONY : pipeline-trajectory-follower.cpp.o
+
+pipeline-trajectory-follower.i: pipeline-trajectory-follower.cpp.i
+.PHONY : pipeline-trajectory-follower.i
+
+# target to preprocess a source file
+pipeline-trajectory-follower.cpp.i:
+	$(MAKE) -f CMakeFiles/trajectory-follower.dir/build.make CMakeFiles/trajectory-follower.dir/pipeline-trajectory-follower.cpp.i
+.PHONY : pipeline-trajectory-follower.cpp.i
+
+pipeline-trajectory-follower.s: pipeline-trajectory-follower.cpp.s
+.PHONY : pipeline-trajectory-follower.s
+
+# target to generate assembly for a file
+pipeline-trajectory-follower.cpp.s:
+	$(MAKE) -f CMakeFiles/trajectory-follower.dir/build.make CMakeFiles/trajectory-follower.dir/pipeline-trajectory-follower.cpp.s
+.PHONY : pipeline-trajectory-follower.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -147,9 +184,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... ladderTest"
 	@echo "... rebuild_cache"
+	@echo "... trajectory-follower"
 	@echo "... ladder-pipeline-example.o"
 	@echo "... ladder-pipeline-example.i"
 	@echo "... ladder-pipeline-example.s"
+	@echo "... pipeline-trajectory-follower.o"
+	@echo "... pipeline-trajectory-follower.i"
+	@echo "... pipeline-trajectory-follower.s"
 .PHONY : help
 
 

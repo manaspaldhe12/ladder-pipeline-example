@@ -14,7 +14,12 @@ set(CMAKE_C_FLAGS "-std=gnu99")
 set( CMAKE_VERBOSE_MAKEFILE true )
 
 file(GLOB ladderTest_source "ladder-pipeline-example.cpp")
+file(GLOB pipeline-trajectory-follower_source "pipeline-trajectory-follower.cpp")
 
 add_executable(ladderTest ${ladderTest_source})
 target_link_libraries(ladderTest m rt ach huboparams )
+
+add_executable(trajectory-follower ${pipeline-trajectory-follower_source})
+target_link_libraries(trajectory-follower m rt ach huboparams )
+
 
