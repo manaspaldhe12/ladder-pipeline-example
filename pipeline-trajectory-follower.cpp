@@ -197,7 +197,7 @@ int main (){
   //std::cout << "cm ach_open result: " << ach_result_to_string(r) << "\n";
 
 
-
+  sendFileTrajectory();
 
 
 

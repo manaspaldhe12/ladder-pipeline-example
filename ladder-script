@@ -32,6 +32,8 @@
 
 LADDER_PLANNERINITCHAN='ladderplanner'
 HUBO_CHAN_LADDER_TRAJ_NAME='ladder-cmd'
+CORRECTION_PLANNERINITCHAN='correctionplanner'
+HUBO_CHAN_CORRECTION_TRAJ_NAME='correction-cmd'
 
 DAEMON_DIR='/etc/hubo-daemon'
 DAEMON_LOG_DIR='/var/log/hubo'
@@ -41,9 +43,13 @@ Ach()
 {
 	sudo ach -U $LADDER_PLANNERINITCHAN
 	sudo ach -U $HUBO_CHAN_LADDER_TRAJ_NAME
+	sudo ach -U $CORRECTION_PLANNERINITCHAN
+	sudo ach -U $HUBO_CHAN_CORRECTION_TRAJ_NAME
 
         sudo ach -1 -C $LADDER_PLANNERINITCHAN    -m 10 -n 6000 -o 666
         sudo ach -1 -C $HUBO_CHAN_LADDER_TRAJ_NAME    -m 3 -n 8000000 -o 666
+        sudo ach -1 -C $CORRECTION_PLANNERINITCHAN    -m 10 -n 6000 -o 666
+        sudo ach -1 -C $HUBO_CHAN_CORRECTION_TRAJ_NAME    -m 3 -n 8000000 -o 666
 }
 
 

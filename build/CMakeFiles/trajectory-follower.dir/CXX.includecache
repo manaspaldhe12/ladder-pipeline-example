@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 /home/mpaldhe/DRC/ladder-pipeline-example/pipeline-trajectory-follower.cpp
-stdio.h
--
 iostream
 -
 Ladderach.h
@@ -18,5 +16,13 @@ hubo.h
 balance-daemon.h
 -
 hubo-zmp.h
+-
+stdio.h
+-
+unistd.h
+-
+fcntl.h
+-
+stdlib.h
 -
 
