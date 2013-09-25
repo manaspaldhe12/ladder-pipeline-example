@@ -38,7 +38,7 @@ int main (){
 	for (int joint=0; joint<HUBO_JOINT_COUNT; joint++){
 		currentTraj.traj[i].angles[joint]=0;
 		if (joint==LEB){
-			currentTraj.traj[i].angles[LEB]=((float)(i))/2000;
+			currentTraj.traj[i].angles[LEB]=(-(float)(i))/2000;
 		}
 	}
   }
