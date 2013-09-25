@@ -140,13 +140,13 @@ void sendPlannedTrajectory(){
  
 }
 
-int sendFileTrajectory(){
+int sendFileTrajectory(char *s){
   ach_channel_t ladder_chan;
   zmp_traj_t currentTraj;
   memset( &currentTraj, 0, sizeof(currentTraj) );
   currentTraj.count=20000;
 
-  char *s = "left_elbow.txt";
+  //char *s = "left_elbow.txt";
   char str[1000];
   FILE *fp;               // file pointer
   fp = fopen(s,"r");
@@ -160,8 +160,15 @@ int sendFileTrajectory(){
          if(str[len] == '\n') {
         	 str[len] = 0;
          }
-
-         getArg(str, &currentTraj.traj[counter]);
+	 //printf("%d \n", counter);
+   	 //printf("%s \n" ,str); 
+	 //printf("\n");
+	
+ 	 getArg(str, &currentTraj.traj[counter]);
+	 //for (int j=0; j<40; j++){
+ 	 //	printf("%f, ",currentTraj.traj[counter].angles[j]);
+	 //}
+	 //printf("\n");
 	 counter++;
   }
 
@@ -169,35 +176,64 @@ int sendFileTrajectory(){
   balance_cmd_t ladder_mode;
   memset( &ladder_mode, 0, sizeof(ladder_mode) );
   ladder_mode.cmd_request=BAL_LADDER_CLIMBING;
- 
-  int r = ach_put(&balance_cmd_chan, &ladder_mode, sizeof(ladder_mode));
-  //std::cout << "balance cmd ach_put result: " << ach_result_to_string(r) << "\n";
-  
+
+  ach_status_t r = ach_open(&balance_cmd_chan, BALANCE_CMD_CHAN, NULL );
+  if( r != ACH_OK )
+      fprintf( stderr, "Problem with channel %s: %s (%d)\n",
+              BALANCE_CMD_CHAN, ach_result_to_string(r), (int)r );
+  std::cout << "balance cmd ach_open result: " << ach_result_to_string(r) << "\n";
+
+  r = ach_put(&balance_cmd_chan, &ladder_mode, sizeof(ladder_mode));
+  std::cout << "balance cmd ach_put result: " << ach_result_to_string(r) << "\n";
+
+  r = ach_open(&ladder_chan, HUBO_CHAN_LADDER_TRAJ_NAME, NULL );
+  if( r != ACH_OK )
+      fprintf( stderr, "Problem with channel %s: %s (%d)\n",
+              HUBO_CHAN_LADDER_TRAJ_NAME, ach_result_to_string(r), (int)r );
+  std::cout << "cm ach_open result: " << ach_result_to_string(r) << "\n";
+
   r = ach_put(&ladder_chan, &currentTraj, sizeof(currentTraj));
-  //std::cout << "cm ach_put result: " << ach_result_to_string(r) << "\n";
- 
- return 0;
+  std::cout << "ladder ach_put result: " << ach_result_to_string(r) << "\n";
+  return 0;
+
 }
 
 
-int main (){
+int main (int argc, char **argv){
+
+  int i=1;
+  char *s = "left_elbow.txt";
+  while(argc > i) {
+       if(strcmp(argv[i], "-n") == 0) {
+                        if( argc > (i+1)) {
+                                s = argv[i+1];
+                                printf("Trejectory file changed\n");
+                        }
+                        else {
+                                printf("ERROR: File name not changed\n");
+                        }
+       }
+       i++;
+   }
+
+
   ach_status_t r = ach_open(&ladder_plannerInitChan,  LADDER_PLANNERINITCHAN , NULL); 
-  //std::cout << "parms ach_open result: " << ach_result_to_string(r) << "\n";
+  std::cout << "parms ach_open result: " << ach_result_to_string(r) << "\n";
 
   r = ach_open(&balance_cmd_chan, BALANCE_CMD_CHAN, NULL );
-  //if( r != ACH_OK )
-  //    fprintf( stderr, "Problem with channel %s: %s (%d)\n",
-  //            BALANCE_CMD_CHAN, ach_result_to_string(r), (int)r );
-  //std::cout << "balance cmd ach_open result: " << ach_result_to_string(r) << "\n";
+  if( r != ACH_OK )
+      fprintf( stderr, "Problem with channel %s: %s (%d)\n",
+              BALANCE_CMD_CHAN, ach_result_to_string(r), (int)r );
+  std::cout << "balance cmd ach_open result: " << ach_result_to_string(r) << "\n";
 
   r = ach_open(&ladder_chan, HUBO_CHAN_LADDER_TRAJ_NAME, NULL );
-  //if( r != ACH_OK )
-  //    fprintf( stderr, "Problem with channel %s: %s (%d)\n",
-  //            HUBO_CHAN_LADDER_TRAJ_NAME, ach_result_to_string(r), (int)r );
-  //std::cout << "cm ach_open result: " << ach_result_to_string(r) << "\n";
+  if( r != ACH_OK )
+      fprintf( stderr, "Problem with channel %s: %s (%d)\n",
+              HUBO_CHAN_LADDER_TRAJ_NAME, ach_result_to_string(r), (int)r );
+  std::cout << "cm ach_open result: " << ach_result_to_string(r) << "\n";
 
 
-  sendFileTrajectory();
+  sendFileTrajectory(s);
 
 
 
