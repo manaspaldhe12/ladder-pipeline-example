@@ -145,7 +145,6 @@ int sendFileTrajectory(char *s){
   zmp_traj_t currentTraj;
   memset( &currentTraj, 0, sizeof(currentTraj) );
   currentTraj.count=20000;
-
   //char *s = "left_elbow.txt";
   char str[1000];
   FILE *fp;               // file pointer
@@ -154,6 +153,9 @@ int sendFileTrajectory(char *s){
   	printf("No Trajectory File!!!\n");
         return 1;  // exit if not file
   }
+
+  printf("trajectory is %s \n", s);
+  
   int counter=0;
   while(fgets(str,sizeof(str),fp) != NULL) {
  	 int len = strlen(str)-1;
@@ -215,7 +217,7 @@ int main (int argc, char **argv){
        }
        i++;
    }
-
+  
 
   ach_status_t r = ach_open(&ladder_plannerInitChan,  LADDER_PLANNERINITCHAN , NULL); 
   std::cout << "parms ach_open result: " << ach_result_to_string(r) << "\n";
@@ -235,6 +237,6 @@ int main (int argc, char **argv){
 
   sendFileTrajectory(s);
 
-
+  fflush(stdout);
 
 }
