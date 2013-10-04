@@ -14,7 +14,7 @@ ach_channel_t ladder_plannerInitChan; //,adder_plannerInitChan;
 balance_cmd_t ladder_mode;
 ach_channel_t ladder_chan;
 ach_channel_t balance_cmd_chan;
-
+ach_channel_t params_chan;
 
 void obtainPlannerParams(){
   LadderPlanner input_params;
@@ -140,7 +140,7 @@ void sendPlannedTrajectory(){
  
 }
 
-int sendFileTrajectory(char *s){
+int sendFileTrajectory(char *s, bool compliance_flag, bool pause_flag){
   ach_channel_t ladder_chan;
   zmp_traj_t currentTraj;
   memset( &currentTraj, 0, sizeof(currentTraj) );
@@ -155,7 +155,12 @@ int sendFileTrajectory(char *s){
   }
 
   printf("trajectory is %s \n", s);
-  
+ 
+  TrajectoryFollowerParams_t traj_params;
+  memset(&traj_params, 0, sizeof(traj_params));
+  traj_params.compliance_flag=compliance_flag;
+  traj_params.pause_flag=pause_flag;
+ 
   int counter=0;
   while(fgets(str,sizeof(str),fp) != NULL) {
  	 int len = strlen(str)-1;
@@ -196,7 +201,17 @@ int sendFileTrajectory(char *s){
 
   r = ach_put(&ladder_chan, &currentTraj, sizeof(currentTraj));
   std::cout << "ladder ach_put result: " << ach_result_to_string(r) << "\n";
+
+  r = ach_open(&params_chan, HUBO_CHAN_TRAJECTORY_PARAMS, NULL );
+  if( r != ACH_OK )
+      fprintf( stderr, "Problem with channel %s: %s (%d)\n",
+              HUBO_CHAN_TRAJECTORY_PARAMS, ach_result_to_string(r), (int)r );
+  std::cout << "params_chan ach_open result: " << ach_result_to_string(r) << "\n";
+
+  r = ach_put(&params_chan, &traj_params, sizeof(traj_params));
+  std::cout << "params_chan ach_put result: " << ach_result_to_string(r) << "\n";
   return 0;
+
 
 }
 
@@ -234,8 +249,13 @@ int main (int argc, char **argv){
               HUBO_CHAN_LADDER_TRAJ_NAME, ach_result_to_string(r), (int)r );
   std::cout << "cm ach_open result: " << ach_result_to_string(r) << "\n";
 
+  r = ach_open(&params_chan, HUBO_CHAN_TRAJECTORY_PARAMS, NULL );
+  if( r != ACH_OK )
+      fprintf( stderr, "Problem with channel %s: %s (%d)\n",
+              HUBO_CHAN_TRAJECTORY_PARAMS, ach_result_to_string(r), (int)r );
+  std::cout << "params_chan ach_open result: " << ach_result_to_string(r) << "\n";
 
-  sendFileTrajectory(s);
+  sendFileTrajectory(s, true, false);
 
   fflush(stdout);
 

@@ -38,9 +38,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/mpaldhe/DRC/ladder-pipeline-example
 
@@ -52,8 +49,8 @@ CMAKE_BINARY_DIR = /home/mpaldhe/DRC/ladder-pipeline-example/build
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running interactive CMake command-line interface..."
+	/usr/bin/cmake -i .
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -102,6 +99,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named correctionTest
+
+# Build rule for target.
+correctionTest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 correctionTest
+.PHONY : correctionTest
+
+# fast build rule for target.
+correctionTest/fast:
+	$(MAKE) -f CMakeFiles/correctionTest.dir/build.make CMakeFiles/correctionTest.dir/build
+.PHONY : correctionTest/fast
+
+#=============================================================================
 # Target rules for targets named ladderTest
 
 # Build rule for target.
@@ -126,6 +136,30 @@ trajectory-follower: cmake_check_build_system
 trajectory-follower/fast:
 	$(MAKE) -f CMakeFiles/trajectory-follower.dir/build.make CMakeFiles/trajectory-follower.dir/build
 .PHONY : trajectory-follower/fast
+
+correction-example.o: correction-example.cpp.o
+.PHONY : correction-example.o
+
+# target to build an object file
+correction-example.cpp.o:
+	$(MAKE) -f CMakeFiles/correctionTest.dir/build.make CMakeFiles/correctionTest.dir/correction-example.cpp.o
+.PHONY : correction-example.cpp.o
+
+correction-example.i: correction-example.cpp.i
+.PHONY : correction-example.i
+
+# target to preprocess a source file
+correction-example.cpp.i:
+	$(MAKE) -f CMakeFiles/correctionTest.dir/build.make CMakeFiles/correctionTest.dir/correction-example.cpp.i
+.PHONY : correction-example.cpp.i
+
+correction-example.s: correction-example.cpp.s
+.PHONY : correction-example.s
+
+# target to generate assembly for a file
+correction-example.cpp.s:
+	$(MAKE) -f CMakeFiles/correctionTest.dir/build.make CMakeFiles/correctionTest.dir/correction-example.cpp.s
+.PHONY : correction-example.cpp.s
 
 ladder-pipeline-example.o: ladder-pipeline-example.cpp.o
 .PHONY : ladder-pipeline-example.o
@@ -181,10 +215,14 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... correctionTest"
 	@echo "... edit_cache"
 	@echo "... ladderTest"
 	@echo "... rebuild_cache"
 	@echo "... trajectory-follower"
+	@echo "... correction-example.o"
+	@echo "... correction-example.i"
+	@echo "... correction-example.s"
 	@echo "... ladder-pipeline-example.o"
 	@echo "... ladder-pipeline-example.i"
 	@echo "... ladder-pipeline-example.s"

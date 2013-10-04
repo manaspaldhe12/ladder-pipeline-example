@@ -15,11 +15,16 @@ set( CMAKE_VERBOSE_MAKEFILE true )
 
 file(GLOB ladderTest_source "ladder-pipeline-example.cpp")
 file(GLOB pipeline-trajectory-follower_source "pipeline-trajectory-follower.cpp")
+file(GLOB correctionTest_source "correction-example.cpp")
 
 add_executable(ladderTest ${ladderTest_source})
 target_link_libraries(ladderTest m rt ach huboparams )
 
 add_executable(trajectory-follower ${pipeline-trajectory-follower_source})
 target_link_libraries(trajectory-follower m rt ach huboparams )
+
+add_executable(correctionTest ${correctionTest_source})
+target_link_libraries(correctionTest m rt ach huboparams )
+
 
 
